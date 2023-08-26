@@ -1,6 +1,5 @@
-import { galleryItems } from './gallery-items.js';
+import { galleryItems } from "./gallery-items.js";
 // Change code below this line
-
 
 const containerOfGallery = document.querySelector(".gallery");
 const markupOfGallery = galleryItems
@@ -20,11 +19,16 @@ const markupOfGallery = galleryItems
 
 containerOfGallery.insertAdjacentHTML("beforeend", markupOfGallery);
 
-containerOfGallery.addEventListener("click", (e) => {
+const containerClickOn = (e) => {
   e.preventDefault();
 
+  if (e.target.classList.contains("gallery")) return;
   const imageSource = e.target.dataset.source;
-  basicLightbox
-    .create(`<img src="${imageSource}" width="800" height="600">`)
-    .show();
-});
+
+  const lightbox = basicLightbox.create(`
+    <img src="${imageSource}"width="800" height="600">`);
+
+  lightbox.show();
+};
+
+containerOfGallery.addEventListener("click", containerClickOn);
